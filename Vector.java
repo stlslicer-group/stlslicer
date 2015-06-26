@@ -1,5 +1,6 @@
 package stlslicer;
 
+//class name should be changed to Point
 public class Vector {
     double x;
     double y;
@@ -19,6 +20,7 @@ public class Vector {
     }
     */
     
+	//constructor accepting string and parsing three coords
     public Vector(String stlString){
         String[] component = Vector.splitString(stlString);
         this.x = Double.parseDouble(component[0].substring(0,component[0].indexOf("e")))

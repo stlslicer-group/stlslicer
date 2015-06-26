@@ -2,11 +2,15 @@ package stlslicer;
 
 public class Model {
     int numFacets;
+	//use something smarter than built in array type?
     Facet[] f;
     public Model(int number_of_facets){
         numFacets = number_of_facets;
+		//allocate array in constructor
         f = new Facet[numFacets];
     }
+	
+	//n should be internally maintained by the facet class?
     public void defineFacet(int n, Vector A, Vector B, Vector C){
         f[n] = new Facet(A,B,C);
         //System.out.println("Defined Facet " + n);
@@ -14,6 +18,8 @@ public class Model {
     //returns an array of two vectors defining the extents of the model
     //the 1st vector gives the minimum in each dimension, 
     //the 2nd vector gives the maximum in each dimension
+
+	//can keep track of min and max point while creating the facets or whatnot
     public Extents getExtents(){
         //TODO Clean this up eventually (made this before Extents class)
         Vector[] v = new Vector[2];

@@ -14,13 +14,20 @@ public class STLSlicer {
         System.out.println("loadModel");
         Model m = loadModel("/home/daniel/Desktop/porsche.stl");
        
+		//arbitrary scale by 10
         m.scale(10.0);
         Extents e = m.getExtents();
+		//the min and max 3D coords
         printVect(e.max);
         printVect(e.min);
         
+		//allocate slices
         Slice[] s = new Slice[numSlices];
+
+		//create the set number of slices 
         for (int i = 0; i < numSlices; i++){
+			//create a new plane in with a normal of 1,  and the definition of the current plane
+			//Dont compute the slice width every time; make const
             Plane p = new Plane(new Vector(1,0,0),
                     new Vector((double)(((e.max.x-e.min.x)/numSlices)*i+(double)e.min.x),0,0));
             
@@ -92,12 +99,15 @@ public class STLSlicer {
     public static LineSegment[] Slicer(Model m, Plane p){
         int n = 0; //number of intersecting facets
         //find n and declare appropriately sized array of lines
+		//is this where OpenCL will come in?
         for(int i = 0; i < m.numFacets; i++){
             if(intersects(m.f[i], p)){
                 n++;
             }
         }
         //System.out.println(n);
+
+		//make as many LineSegments as intersections which were found
         LineSegment[] s = new LineSegment[n];
         
         //fill array with the lines of intersection
@@ -186,19 +196,22 @@ public class STLSlicer {
         //count the number of facets in the file
         BufferedReader count = new BufferedReader(
                 new FileReader(fileName));
-        int n = 0;
+        int numberOfFacets = 0;
         while ((line = count.readLine()) != null){
-            if(line.contains("outer loop") == true) n++;
+            if(line.contains("outer loop") == true){
+				numberOfFacets++;
+			} 
         }
         count.close();
-        Model m = new Model(n);
-        System.out.println(n);
+        Model m = new Model(numberOfFacets);
+        System.out.println("Number of facets in model: " + numberOfFacets);
         //save vertices of each face to the model
         int i = 0;
         BufferedReader in = new BufferedReader(
                 new FileReader(fileName));
         while ((line = in.readLine()) != null){
             if(line.contains("outer loop") == true){
+				//each of A B and C represent a 3D point
                 A = in.readLine().substring(14, 55);
                 B = in.readLine().substring(14, 55);
                 C = in.readLine().substring(14, 55);
