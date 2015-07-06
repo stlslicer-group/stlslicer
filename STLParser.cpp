@@ -8,7 +8,7 @@ STLParser::STLParser(std::string filePath): mFilePath{filePath} {
 
 	//attempt to open the file
 	if (!openFile()){
-		//TODO return FileFailedToOpen error code
+		throw FileFailedToOpenError{};
 	}
 	//skip the header; 80 bytes. Could check for the word 'solid' to see if ascii STL file.
 	mInFile.ignore(80);
@@ -101,11 +101,10 @@ float STLParser::readFloat(){
 bool STLParser::openFile(){
 	mInFile.open(mFilePath, std::ios_base::in | std::ios_base::binary);
 	if (!mInFile){
-		//TODO throw FileFailedToOpen error upon open failure
-		std::cerr << "Error: unable to open the file for reading.\n";	
+		//unable to open the file for reading	
 		mFileOpen = false;
 	} else {
-		std::cout << "Was able to open the file for reading.\n";
+		//was able to open the file for reading;
 		mFileOpen = true;
 	}	
 	return mFileOpen;

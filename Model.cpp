@@ -3,7 +3,7 @@
 	
 //constructor definition
 Model::Model(std::string filePath): mFilePath{filePath} {
-	
+
 }
 
 bool Model::loadModel(){

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstdint> //for fixed width integers
 #include <vector>
+#include "Error.h"
 
 class STLParser {
 	private:

@@ -5,6 +5,7 @@
 #include <vector>
 #include "STLParser.h"
 #include "Facet.h"
+//#include "Error.h"
 
 class Model {
 	private:
