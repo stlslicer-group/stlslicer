@@ -8,7 +8,7 @@ STLParser::STLParser(std::string filePath): mFilePath{filePath} {
 
 	//attempt to open the file
 	if (!openFile()){
-		throw FileFailedToOpenError{};
+		throw FileFailedToOpenError{"Could not open file: " + mFilePath +"\n"};
 	}
 	//skip the header; 80 bytes. Could check for the word 'solid' to see if ascii STL file.
 	mInFile.ignore(80);
@@ -25,20 +25,20 @@ STLParser::~STLParser(){
 Facet STLParser::getNextFacet(){
 	
 	//container to hold the points that will be used to construct facet object
-	std::vector<ThreeDPoint> threePoints{};
+	std::vector<ThreeDPoint> fourPoints{};
 	
 	//get a triangle
 	//ignore the normal vector; 12 bytes
-	mInFile.ignore(12);
+	//mInFile.ignore(12);
 
-	//create three points (four if want normal)
+	//create four points
 	int i;
-	for (i=0; i<3; i++){
+	for (i=0; i<4; i++){
 		float x = readFloat();
 		float y = readFloat();
 		float z = readFloat();
 		 
-		threePoints.emplace_back(x, y, z);
+		fourPoints.emplace_back(x, y, z);
 
 	}
 	//end for
@@ -50,7 +50,7 @@ Facet STLParser::getNextFacet(){
 	++mNextFacetNumber;
 
 	//create and return facet object
-	Facet myFacet{threePoints[0], threePoints[1], threePoints[2]};
+	Facet myFacet{fourPoints[0], fourPoints[1], fourPoints[2], fourPoints[3]};
 	return myFacet;
 }
 

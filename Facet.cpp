@@ -2,11 +2,14 @@
 #include "Facet.h"
 	
 //constructor definition
-Facet::Facet(ThreeDPoint pointOne, ThreeDPoint pointTwo, ThreeDPoint pointThree) : mPointOne{pointOne}, mPointTwo{pointTwo}, mPointThree{pointThree} {
+Facet::Facet(ThreeDPoint normal, ThreeDPoint pointOne, ThreeDPoint pointTwo, ThreeDPoint pointThree) : mNormal{normal}, mPointOne{pointOne}, mPointTwo{pointTwo}, mPointThree{pointThree} {
 	//extra stuff
 }
 
 //class member definitions
+ThreeDPoint Facet::getNormal() const {
+	return mNormal;
+}
 ThreeDPoint Facet::getPointOne() const {
 	return mPointOne;
 }
@@ -18,6 +21,8 @@ ThreeDPoint Facet::getPointThree() const {
 }
 
 void Facet::printAllPoints() const {
+	std::cout << "Normal One: \n";
+	std::cout << "X: " << mNormal.getX() << " Y: " << mNormal.getY() << " Z: " << mNormal.getZ() << "\n";
 	std::cout << "Point One: \n";
 	std::cout << "X: " << mPointOne.getX() << " Y: " << mPointOne.getY() << " Z: " << mPointOne.getZ() << "\n";
 	std::cout << "Point Two: \n";

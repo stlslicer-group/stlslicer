@@ -3,25 +3,41 @@
 
 #include <string>
 #include <vector>
+#include <limits>
 #include "STLParser.h"
 #include "Facet.h"
-//#include "Error.h"
+#include "Error.h"
 
 class Model {
 	private:
 		//private members
 		std::string mFilePath;		
 		bool mModelLoaded{false};
-		STLParser mBinarySTLParser{mFilePath};
 		int mNumberOfFacets{0};
 		std::vector<Facet> mFacets{}; 
+		float mXMax{std::numeric_limits<float>::lowest()};
+		float mYMax{std::numeric_limits<float>::lowest()};
+		float mZMax{std::numeric_limits<float>::lowest()};
+		float mXMin{std::numeric_limits<float>::max()};
+		float mYMin{std::numeric_limits<float>::max()};
+		float mZMin{std::numeric_limits<float>::max()};
+
+		//private functions
+		void checkExtents(const Facet& currentFacet);
+		void checkMaxMin(const ThreeDPoint& currentPoint);
+		void resetModel();
 	
 	public:
 		//constructor
 		Model(std::string filePath);
 
 		bool loadModel();
+		bool reloadModel();
 		std::string getFilePath() const;
+		bool isModelLoaded() const;
+		std::vector<ThreeDPoint> getExtents() const;
+
+		
 };
 
 #endif

@@ -7,14 +7,16 @@
 class Facet {
 	private:
 		//private members
+		ThreeDPoint mNormal;
 		ThreeDPoint mPointOne;
 		ThreeDPoint mPointTwo;
 		ThreeDPoint mPointThree;
 	
 	public:
 		//constructor
-		Facet(ThreeDPoint pointOne, ThreeDPoint pointTwo, ThreeDPoint pointThree);
+		Facet(ThreeDPoint normal, ThreeDPoint pointOne, ThreeDPoint pointTwo, ThreeDPoint pointThree);
 
+		ThreeDPoint getNormal() const;
 		ThreeDPoint getPointOne() const;
 		ThreeDPoint getPointTwo() const;
 		ThreeDPoint getPointThree() const;
