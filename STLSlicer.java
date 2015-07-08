@@ -86,7 +86,7 @@ public class STLSlicer {
             coords+=",";
             coords+=String.valueOf(l[i].v2.y);
             coords+="\"\nid=\"path"+String.valueOf(i)+"\"\n/>";
-            out.write("\n"+coords+"\n");
+            out.write("\n"+ coords +"\n");
         }
         
         //the shit that comes after the path

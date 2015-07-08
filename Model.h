@@ -6,6 +6,7 @@
 #include <limits>
 #include "STLParser.h"
 #include "Facet.h"
+//#include "Slicer.h"
 #include "Error.h"
 
 class Model {
@@ -33,11 +34,21 @@ class Model {
 
 		bool loadModel();
 		bool reloadModel();
+
+		//TODO incorrect results in two functions below
+		bool scaleModel(float scaleFactor);
+		bool reduceModel(float reduceFactor);
+
 		std::string getFilePath() const;
 		bool isModelLoaded() const;
+
+		//min then max
 		std::vector<ThreeDPoint> getExtents() const;
 
-		
+		bool slice(int numberOfSlices, std::string outputPath);	
+
+		//declare Slicer a friend class so that it may access the Facet vector
+		friend class Slicer;
 };
 
 #endif

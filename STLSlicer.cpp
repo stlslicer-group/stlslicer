@@ -10,11 +10,14 @@ void printExtents(const std::vector<ThreeDPoint>&);
 int main (int argc, char *argv[]){
 
 	/*params:
-		int numberOfPlanes
+		int numberOfSlices
 		std::string modelPath
+		std::string folderOutputPath
 	*/
 	
+	int numberOfSlices = 20; 
 	std::string modelPath = "/home/pas/CppProjects/stlslicer/led.stl";
+	std::string folderOutputPath = "/home/pas/CppProjects/stlslicer/";
 	
 	//Create Model object
 	
@@ -25,11 +28,12 @@ int main (int argc, char *argv[]){
 		std::cerr << "The data could not be loaded into the model.\n";
 		return 1;
 	}
-
+	
 	//print extents
 	std::vector<ThreeDPoint> extents{myModel.getExtents()};
 	printExtents(extents);
 
+	myModel.slice(numberOfSlices, folderOutputPath);
 
 
 	return 0;

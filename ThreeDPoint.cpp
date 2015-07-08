@@ -16,4 +16,14 @@ float ThreeDPoint::getY() const {
 float ThreeDPoint::getZ() const {
 	return mZ;
 }
+
+void ThreeDPoint::setX(float x){
+	mX = x;
+}
+void ThreeDPoint::setY(float y){
+	mY = y;
+}
+void ThreeDPoint::setZ(float z){
+	mZ = z;
+}
 	

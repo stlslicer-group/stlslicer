@@ -16,5 +16,18 @@ class FileFailedToOpenError {
 			
 };
 
+class FileFailedToBeCreatedError {
+
+	private:
+		std::string mErrorMessage;
+
+	public:
+		FileFailedToBeCreatedError(std::string errorMessage) : mErrorMessage{errorMessage} {}
+		std::string getErrorMessage() const{
+			return mErrorMessage;
+		}		
+			
+};
+
 #endif
 
