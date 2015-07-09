@@ -98,11 +98,6 @@ bool Model::scaleModel(float scaleFactor){
 	return true;
 }
 
-bool Model::reduceModel(float reduceFactor){
-
-	return true;
-}
-
 void Model::resetModel(){
 	//reset Facet container
 	mFacets.clear();
