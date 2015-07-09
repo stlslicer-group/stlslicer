@@ -29,6 +29,10 @@ class SVGWriter {
 
 		//destructor
 		~SVGWriter();
+
+		//disallow copying and assignments
+		SVGWriter(const SVGWriter& svgWriter) = delete;
+		SVGWriter& operator=(const SVGWriter& svgWriter) = delete;
 		
 		//public functions
 		void write();

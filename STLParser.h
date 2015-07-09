@@ -32,6 +32,11 @@ class STLParser {
 		//destructor
 		~STLParser();
 
+		//disallow copying and assignments
+		STLParser(const STLParser& stlParser) = delete;
+		STLParser& operator=(const STLParser& stlParser) = delete;
+
+
 		Facet getNextFacet();
 		
 		//should only be called after first getNextFacet(), or else zero returned

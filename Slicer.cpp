@@ -14,37 +14,32 @@ bool Slicer::slice(){
 	int numberOfFacets = mMyModel-> mNumberOfFacets;
 	float minXExtent = mMyModel -> mXMin;
 	float maxXExtent = mMyModel -> mXMax;
-	float maxYEntent = mMyModel -> mYMax;
+	float maxYExtent = mMyModel -> mYMax;
 
 	//compute length/width ints for output
-
+	//TODO should not be whole distance?
 	int xMax = 0;
 	int yMax = 0;
 
 	//set bounds for writting
-	if (maxXExtent >= 0){
-		 xMax = (int) (maxXExtent + 0.5);
-	} else {
-		xMax = (int) (maxXExtent - 0.5);
-	}
-
+	//convert to int from float
+	xMax = static_cast<int>(maxXExtent);
+	
+	//to prevent a width of zero on svg output
 	if (xMax == 0){
 		xMax = 1;
 	}
 
-	std::cout << "xMax is: " << xMax << " \n";
+	std::cout << "xMax on svg output is: " << xMax << " \n";
 
-	if (maxYEntent >= 0){
-		 yMax = (int) (maxYEntent + 0.5);
-	} else {
-		yMax = (int) (maxYEntent - 0.5);
-	}
+	xMax = static_cast<int>(maxYExtent);
 
+	//to prevent a height of zero on svg output
 	if (yMax == 0){
 		yMax = 1;
 	}
 
-	std::cout << "yMax is: " << yMax << " \n";
+	std::cout << "yMax on svg output is: " << yMax << " \n";
 
 	int currentPlaneIndex, currentFacetIndex;
 
@@ -69,8 +64,8 @@ bool Slicer::slice(){
 		std::cout << "Facet hits this level: " << numFacetHits << "\n";
 		//if container not empty, send to the SVGWriter to be outputted to file
 		if (!lineSegments.empty()){
-			//make SVGWriter object
 			try {
+				//make SVGWriter object
 				std::string outputFile = mFolderOutputPath + "slice_" + std::to_string(currentPlaneIndex) + ".svg";
 				SVGWriter myWriter{outputFile, std::move(lineSegments), xMax, yMax};
 				myWriter.write();

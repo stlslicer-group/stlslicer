@@ -1,7 +1,7 @@
 	
 #include "Model.h"
 
-#include "Slicer.h" //have to include in body as Slicer.h includes Model.h; circular definition
+#include "Slicer.h" //have to include in body as Slicer.h includes Model.h; circular inclusion
 	
 //constructor definition
 Model::Model(std::string filePath): mFilePath{filePath} {
@@ -84,6 +84,7 @@ bool Model::scaleModel(float scaleFactor){
 		mFacets[i].getPointThree().setZ((mFacets[i].getPointThree().getZ() * scaleFactor));
 	}
 
+	//TODO is this correct?
 	//adjust extents 
 	mXMin *= scaleFactor;
 	mYMin *= scaleFactor;

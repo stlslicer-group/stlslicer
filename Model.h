@@ -35,9 +35,8 @@ class Model {
 		bool loadModel();
 		bool reloadModel();
 
-		//TODO incorrect results in two functions below
+		//TODO incorrect results with this function
 		bool scaleModel(float scaleFactor);
-		bool reduceModel(float reduceFactor);
 
 		std::string getFilePath() const;
 		bool isModelLoaded() const;
@@ -47,7 +46,8 @@ class Model {
 
 		bool slice(int numberOfSlices, std::string outputPath);	
 
-		//declare Slicer a friend class so that it may access the Facet vector
+		//declare Slicer a friend class so that it may access 
+		//	the potentially large mFacets vector without the need to copy
 		friend class Slicer;
 };
 

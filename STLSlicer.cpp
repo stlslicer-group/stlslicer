@@ -33,6 +33,7 @@ int main (int argc, char *argv[]){
 	std::vector<ThreeDPoint> extents{myModel.getExtents()};
 	printExtents(extents);
 
+	//produce svg output
 	myModel.slice(numberOfSlices, folderOutputPath);
 
 

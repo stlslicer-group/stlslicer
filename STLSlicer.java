@@ -26,8 +26,8 @@ public class STLSlicer {
 
 		//create the set number of slices 
         for (int i = 0; i < numSlices; i++){
-			//create a new plane in with a normal of 1,  and the definition of the current plane
-			//Dont compute the slice width every time; make const
+			//create a new plane in with a normal of 1 in x,  and the point in x of the current plane
+			//Don't compute the slice width every time; make const
             Plane p = new Plane(new Vector(1,0,0),
                     new Vector((double)(((e.max.x-e.min.x)/numSlices)*i+(double)e.min.x),0,0));
             
