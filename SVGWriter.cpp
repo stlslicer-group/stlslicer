@@ -3,13 +3,13 @@
 	
 //constructor definition
 
-SVGWriter::SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, int xMax, int yMax) : mFileOutputPath{fileOutputPath}, mXMax{xMax}, mYMax{yMax}, mLineSegments{std::move(lineSegments)} {
+SVGWriter::SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, int yMax, int zMax) : mFileOutputPath{fileOutputPath}, mYMax{yMax}, mZMax{zMax}, mLineSegments{std::move(lineSegments)} {
 	//confirm mFileOutputPath is valid
 	if (!openFile()){
 		throw FileFailedToBeCreatedError{"Could not open file: " + mFileOutputPath +"\n"};
 	}
 	
-	mHeaderString = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\nversion=\"1.1\"\nwidth=\"" + std::to_string(mXMax) + "\"\nheight=\"" + std::to_string(mYMax) +"\"\nid=\"svg2\">\n<defs\nid=\"defs4\" />\n");
+	mHeaderString = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg\nversion=\"1.1\"\nwidth=\"" + std::to_string(mYMax) + "\"\nheight=\"" + std::to_string(mZMax) +"\"\nid=\"svg2\">\n<defs\nid=\"defs4\" />\n");
 }
 
 SVGWriter::~SVGWriter(){

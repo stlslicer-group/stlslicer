@@ -13,8 +13,8 @@ class SVGWriter {
 		//private members
 		std::string mFileOutputPath;
 		std::ofstream mFileOut{};
-		int mXMax;
 		int mYMax;
+		int mZMax;
 		//line segments
 		const std::vector<Line> mLineSegments;
 		std::string mHeaderString{};
@@ -25,7 +25,7 @@ class SVGWriter {
 	
 	public:
 		//constructor
-		SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, int xMax, int yMax);
+		SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, int yMax, int zMax);
 
 		//destructor
 		~SVGWriter();
