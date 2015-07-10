@@ -4,7 +4,7 @@
 Slicer::Slicer(const Model *myModel, int numberOfSlices, std::string folderOutputPath) : mMyModel{myModel}, mNumberOfSlices{numberOfSlices}, mFolderOutputPath{folderOutputPath} {
 	//compute slice width 
 	//default to cutting across in the x direction
-	mSliceWidth = (myModel->getExtents()[1].getX() - myModel->getExtents()[0].getX())/numberOfSlices;
+	mSliceWidth = ((mMyModel-> mXMax) - (mMyModel-> mXMin))/(mNumberOfSlices - 1);
 	std::cout << "The slice width is: " << mSliceWidth << "\n";
 }
 
