@@ -28,13 +28,13 @@ void SVGWriter::write(){
 		std::string coords{"d=\"M "};
 		mFileOut << "<path\nstyle=\"fill:none;stroke:#000000;stroke-width:3px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\"";
 		
-		coords+=std::to_string(mLineSegments[i].getPointOne().getX());
-		coords+=",";
 		coords+=std::to_string(mLineSegments[i].getPointOne().getY());
-		coords+=" ";
-		coords+=std::to_string(mLineSegments[i].getPointTwo().getX());
 		coords+=",";
+		coords+=std::to_string(mLineSegments[i].getPointOne().getZ());
+		coords+=" ";
 		coords+=std::to_string(mLineSegments[i].getPointTwo().getY());
+		coords+=",";
+		coords+=std::to_string(mLineSegments[i].getPointTwo().getZ());
 		coords+="\"\nid=\"path"+std::to_string(i)+"\"\n/>";
 		mFileOut << "\n"+ coords +"\n";
 	}
