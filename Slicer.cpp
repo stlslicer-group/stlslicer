@@ -17,20 +17,37 @@ bool Slicer::slice(){
 	float maxYExtent = mMyModel -> mYMax;
 	float minZExtent = mMyModel -> mZMin;
 	float maxZExtent = mMyModel -> mZMax;
+	//amount to translate the svg drawing, as the window only supports (0 > 
+	float yTrans = 0.0;
+	float zTrans = 0.0;
 
 	//compute length/width ints for output
-	int yMax = 0;
-	int zMax = 0;
+	int yViewWidth = 0;
+	int zViewWidth = 0;
 
 	//set bounds for writting
 	//convert to int from float
-	yMax = static_cast<int>(ceil((maxYExtent - minYExtent)));
+	yViewWidth = static_cast<int>(ceil((maxYExtent - minYExtent)));
 
-	std::cout << "yMax on svg output is: " << yMax << " \n";
+	std::cout << "yViewWidth on svg output is: " << yViewWidth << " \n";
 
-	zMax = static_cast<int>(ceil((maxZExtent - minZExtent)));
+	zViewWidth = static_cast<int>(ceil((maxZExtent - minZExtent)));
 
-	std::cout << "zMax on svg output is: " << zMax << " \n";
+	std::cout << "zViewWidth on svg output is: " << zViewWidth << " \n";
+
+	if (minYExtent < 0.0){
+		yTrans = -minYExtent;
+	}
+
+	if (minZExtent < 0.0){
+		zTrans = -minZExtent;
+	}
+
+	std::cout << "yTrans will be translated: " << yTrans << " units to fit in svg output window.\n";
+	std::cout << "zTrans will be translated: " << zTrans << " units to fit in svg output window.\n";
+	
+	//make an extent object to pass to writer
+	WriterParams writerParams{yViewWidth, zViewWidth, yTrans, zTrans};
 
 	int currentPlaneIndex, currentFacetIndex;
 
@@ -58,7 +75,7 @@ bool Slicer::slice(){
 			try {
 				//make SVGWriter object
 				std::string outputFile = mFolderOutputPath + "slice_" + std::to_string(currentPlaneIndex) + ".svg";
-				SVGWriter myWriter{outputFile, std::move(lineSegments), yMax, zMax};
+				SVGWriter myWriter{outputFile, std::move(lineSegments), writerParams};
 				myWriter.write();
 			} catch (FileFailedToBeCreatedError &error){
 				std::cerr << error.getErrorMessage();

@@ -7,6 +7,7 @@
 #include "Line.h"
 #include "Math.h"
 #include "SVGWriter.h"
+#include "WriterParams.h"
 #include "Error.h"
 #include <string>
 #include <vector>

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "Line.h"
+#include "WriterParams.h"
 #include "Error.h"
 
 class SVGWriter {
@@ -13,11 +14,13 @@ class SVGWriter {
 		//private members
 		std::string mFileOutputPath;
 		std::ofstream mFileOut{};
-		int mYMax;
-		int mZMax;
+
 		//line segments
 		const std::vector<Line> mLineSegments;
 		std::string mHeaderString{};
+
+		//writer params
+		WriterParams mWriterParams;
 
 		//private functions
 		bool openFile();
@@ -25,7 +28,7 @@ class SVGWriter {
 	
 	public:
 		//constructor
-		SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, int yMax, int zMax);
+		SVGWriter(std::string fileOutputPath, std::vector<Line>&& lineSegments, WriterParams writerParams);
 
 		//destructor
 		~SVGWriter();
