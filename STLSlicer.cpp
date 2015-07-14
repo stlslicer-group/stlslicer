@@ -16,8 +16,8 @@ int main (int argc, char *argv[]){
 	*/
 	
 	int numberOfSlices = 20; 
-	std::string modelPath = "/home/pas/CppProjects/stlslicer/led.stl";
-	std::string folderOutputPath = "/home/pas/CppProjects/stlslicer/";
+	std::string modelPath = "/home/pas/CppProjects/stlslicer/eiffel.stl";
+	std::string folderOutputPath = "/home/pas/CppProjects/stlslicer/SliceOutput/";
 	
 	//Create Model object
 	

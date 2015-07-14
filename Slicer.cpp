@@ -17,37 +17,39 @@ bool Slicer::slice(){
 	float maxYExtent = mMyModel -> mYMax;
 	float minZExtent = mMyModel -> mZMin;
 	float maxZExtent = mMyModel -> mZMax;
-	//amount to translate the svg drawing, as the window only supports (0 > 
+	//amount to translate the svg drawing, as the svg window only supports >= 0
 	float yTrans = 0.0;
 	float zTrans = 0.0;
 
 	//compute length/width ints for output
+	int zViewHeight = 0;
 	int yViewWidth = 0;
-	int zViewWidth = 0;
 
 	//set bounds for writting
 	//convert to int from float
-	yViewWidth = static_cast<int>(ceil((maxYExtent - minYExtent)));
+	zViewHeight= static_cast<int>(ceil((maxYExtent - minYExtent)));
+
+	std::cout << "zViewHeight on svg output is: " << zViewHeight << " \n";
+
+	yViewWidth = static_cast<int>(ceil((maxZExtent - minZExtent)));
 
 	std::cout << "yViewWidth on svg output is: " << yViewWidth << " \n";
 
-	zViewWidth = static_cast<int>(ceil((maxZExtent - minZExtent)));
-
-	std::cout << "zViewWidth on svg output is: " << zViewWidth << " \n";
-
-	if (minYExtent < 0.0){
+	if (minYExtent != 0.0){
+		//the model needs to be translated by its y extent in the opposite direction as the sign
 		yTrans = -minYExtent;
 	}
 
-	if (minZExtent < 0.0){
+	if (minZExtent != 0.0){
+		//the model needs to be translated by its z extent in the opposite direction as the sign
 		zTrans = -minZExtent;
 	}
 
 	std::cout << "yTrans will be translated: " << yTrans << " units to fit in svg output window.\n";
 	std::cout << "zTrans will be translated: " << zTrans << " units to fit in svg output window.\n";
 	
-	//make an extent object to pass to writer
-	WriterParams writerParams{yViewWidth, zViewWidth, yTrans, zTrans};
+	//make a writer params object to pass to SVGWriter
+	WriterParams writerParams{zViewHeight, yViewWidth, yTrans, zTrans};
 
 	int currentPlaneIndex, currentFacetIndex;
 
@@ -69,7 +71,7 @@ bool Slicer::slice(){
 				++numFacetHits;
 			}
 		}
-		std::cout << "Facet hits this level: " << numFacetHits << "\n";
+		std::cout << "Facet hits on level " << currentPlaneIndex << ": " << numFacetHits << "\n";
 		//if container not empty, send to the SVGWriter to be outputted to file
 		if (!lineSegments.empty()){
 			try {

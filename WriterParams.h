@@ -4,19 +4,19 @@
 class WriterParams {
 	private:
 		//private members
-		int mXViewWidth;
+		int mZViewHeight;
 		int mYViewWidth;
-		float mXTrans;
 		float mYTrans;
+		float mZTrans;
 
 	public: 
 
-		WriterParams(int xViewWidth, int yViewWidth, float xTrans, float yTrans);
+		WriterParams(int zViewHeight, int yViewWidth, float yTrans, float zTrans);
 
-		int getXViewWidth() const;
+		int getZViewHeight() const;
 		int getYViewWidth() const;
-		float getXTrans() const;
 		float getYTrans() const;
+		float getZTrans() const;
 };
 
 #endif
